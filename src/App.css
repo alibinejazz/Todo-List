@@ -1,38 +1,53 @@
-.App {
-  text-align: center;
+body{
+  background-color: rgb(151, 255, 255);
+  margin-left: 80px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.Header{
+  background-color: rgb(58, 156, 188);
+  font-size: 50px;
+  margin-left: 400px;
+  border-radius: 10px;
+  margin-right: 525px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+th{
+  padding: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+#btn-ed-del{
+  background-color: rgb(29, 35, 35);
+  border-radius: 5px;
+  margin-left: 5px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.inp-fields{
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 200px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#btn-add{
+  font-size: 20px;
+  margin-left: 20px;
+  border-radius: 20px;
+  margin-bottom: 100px;
+}
+
+.space{
+  margin-left: 10px;
+}
+
+.search{
+  margin-left: 400px;
+}
+
+input{
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+table{
+  margin-left: 250px;
 }
