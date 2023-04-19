@@ -7,6 +7,7 @@ function App() {
   const [details, setDetails] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [completedDate, setCompletedDate] = useState("");
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -27,6 +28,7 @@ function App() {
       title: title,
       details: details,
       dueDate: dueDate,
+      completedDate: completedDate,
     };
     setTodoList([...todoList, newTodo]);
     setTitle("");
@@ -55,6 +57,15 @@ function App() {
     todo.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleSortByDueDate = () => {
+    const sortedList = [...todoList].sort((a, b) => {
+      const dateA = new Date(a.dueDate);
+      const dateB = new Date(b.dueDate);
+      return dateA - dateB;
+    });
+    setTodoList(sortedList);
+  };
+
   return (
     <div className="body">
       <h1 className="Header">TODO List</h1>
@@ -78,6 +89,10 @@ function App() {
         Search:
         <input  type="text" value={searchTerm} placeholder="Search Your TODOS" onChange={handleSearchTermChange} />
       </label>
+      <label className="space">
+        Completed Date:
+      <input type="date" value={completedDate} onChange={(e) => setCompletedDate(e.target.value)} />
+      </label>
       
       <br />
       <br />
@@ -91,17 +106,28 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {filteredList.map((todo) => (
-            <tr key={todo.id}>
-              <td>{todo.title}</td>
-              <td>{todo.details}</td>
-              <td>{todo.dueDate}</td>
-              <td>
-                <button id="btn-ed-del" onClick={() => handleEdit(todo.id)}>Edit</button>
-                <button id="btn-ed-del" onClick={() => handleDelete(todo.id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
+        {filteredList.map((todo) => (
+  <tr key={todo.id}>
+    <td>{todo.title}</td>
+    <td>{todo.details}</td>
+    <td className={new Date(todo.dueDate) <= new Date() ? 'past-due' : 'not-past-due'}>
+      {todo.dueDate}
+    </td>
+    <td>
+      {todo.completedDate ? (
+        <p>Completed on {todo.completedDate}</p>
+      ) : (
+        <>
+          <button id="btn-ed-del" onClick={() => handleEdit(todo.id)}>Edit</button>
+          <button id="btn-ed-del" onClick={() => handleDelete(todo.id)}>Delete</button>
+          <button id="btn-sort" onClick={handleSortByDueDate}>Sort by Due Date</button>
+        </>
+      )}
+    </td>
+  </tr>
+))}
+
+          
         </tbody>
       </table>
     </div>
